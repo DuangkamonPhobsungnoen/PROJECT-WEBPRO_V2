@@ -49,7 +49,7 @@ export const UserentCarStore = defineStore('rent', () => {
     if (!!error.dayPickup || !!error.dayReturn) {
       return
     }
-    if(!!error.incorrectDate){
+    if (!!error.incorrectDate) {
       alert(error.incorrectDate)
       return
     }
@@ -89,34 +89,28 @@ export const UserentCarStore = defineStore('rent', () => {
     // Get the difference between the two dates in milliseconds
     const differenceInMs = returnDate.getTime() - rentDate.getTime();
     const diffCurrentRent = (rentDate.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24);
-    //  console.log('difday', diffCurrentRent)
 
     // Convert the difference to days
     const differenceInDays = differenceInMs / (1000 * 60 * 60 * 24);
     if (rentDate < currentDate) {
       error.incorrectDate = "ห้ามเลือกวันในอดีต"
-      // alert("ห้ามเลือกวันในอดีต")
-      return 
+      return
     }
     if (diffCurrentRent < 1) {
       error.incorrectDate = "กรุณาจองล่วงหน้าอย่างน้อย 1-2 วัน"
-      // alert("กรุณาจองล่วงหน้าอย่างน้อย 1-2 วัน")
-      return 
+      return
     }
     if (differenceInDays < 0) {
       error.incorrectDate = "กรุณาเลือกวันคืนรถ ที่ถัดจากวันรับรถ"
-      // alert("กรุณาเลือกวันคืนรถ ที่ถัดจากวันรับรถ")
-      return 
+      return
     }
     if (differenceInDays < 1 && differenceInDays >= 0) {
       error.incorrectDate = "ระยะเวลาในการเช่าต้องมากกว่า 24 ชม."
-      // alert("ระยะเวลาในการเช่าต้องมากกว่า 24 ชม.")
-      return 
+      return
     }
     if (differenceInDays > 30) {
       error.incorrectDate = "ระยะเวลาในการเช่าห้ามเกิน 30 วัน"
-      // alert("ระยะเวลาในการเช่าห้ามเกิน 30 วัน")
-      return 
+      return
     }
     error.incorrectDate = ""
     //  console.log(`The difference between ${rentDate} and ${returnDate} is ${differenceInDays} days.`);
